@@ -1,20 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler';
+import React, { useState } from 'react';
+import { useFonts } from 'expo-font';
+import AppLoading from 'expo-app-loading';
+import { LogBox } from 'react-native';
+import RootStack from './src/route/RootStack.js';
+
+LogBox.ignoreLogs(['Remote debugger']);
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    let [fontsLoaded] = useFonts({
+        PretendardBlack: require('./assets/fonts/Pretendard-Black.ttf'),
+        PretendardBold: require('./assets/fonts/Pretendard-Bold.ttf'),
+        PretendardExtraBold: require('./assets/fonts/Pretendard-ExtraBold.ttf'),
+        PretendardExtraLight: require('./assets/fonts/Pretendard-ExtraLight.ttf'),
+        PretendardLight: require('./assets/fonts/Pretendard-Light.ttf'),
+        PretendardMedium: require('./assets/fonts/Pretendard-Medium.ttf'),
+        PretendardRegular: require('./assets/fonts/Pretendard-Regular.ttf'),
+        PretendardSemiBold: require('./assets/fonts/Pretendard-SemiBold.ttf'),
+        PretendardThin: require('./assets/fonts/Pretendard-Thin.ttf'),
+        PretendardVariable: require('./assets/fonts/PretendardVariable.ttf'),
+    });
+    console.log(fontsLoaded);
+    return (
+      fontsLoaded ? <RootStack /> : <AppLoading />      
+    );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
